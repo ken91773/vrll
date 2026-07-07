@@ -1,10 +1,513 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Webpage</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VRLL — Helicopter Longline Simulator</title>
+<meta name="description" content="VRLL is a free helicopter vertical-reference longline simulator for external-load practice — hover coordination, load control, and flying the hook over a target. Published by Aerobase LLC." />
+<meta name="theme-color" content="#0b1622" />
+
+<!-- Open Graph / social preview -->
+<meta property="og:title" content="VRLL — Helicopter Longline Simulator" />
+<meta property="og:description" content="A free vertical-reference longline simulator for external-load practice. Currently in beta." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://vrllsim.com/" />
+<meta property="og:image" content="https://vrllsim.com/assets/vrll-bg.jpg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg: #0b1622;
+    --panel: rgba(12, 20, 30, 0.82);
+    --panel-solid: #101c29;
+    --border: rgba(120, 150, 180, 0.18);
+    --text: #eaf1f8;
+    --muted: #9fb1c2;
+    --dim: #6f8296;
+    --accent: #f2b134;
+    --accent-2: #5fb0d6;
+    --danger: #e2894a;
+    --radius: 14px;
+    --maxw: 1080px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, .display {
+    font-family: 'Barlow Condensed', 'Inter', sans-serif;
+    letter-spacing: 0.5px;
+    line-height: 1.1;
+    margin: 0 0 0.4em;
+  }
+
+  a { color: var(--accent-2); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 22px; }
+
+  section { padding: 72px 0; border-top: 1px solid var(--border); }
+  section:first-of-type { border-top: none; }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 700; }
+  p.lead { font-size: 1.12rem; color: var(--muted); max-width: 64ch; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 90px 22px 70px;
+    background:
+      linear-gradient(180deg, rgba(8,14,22,0.55) 0%, rgba(8,14,22,0.72) 55%, rgba(11,22,34,0.96) 100%),
+      url('assets/vrll-bg.jpg') center / cover no-repeat;
+    border-top: none;
+  }
+
+  .hero-inner { max-width: 760px; }
+
+  .hero img.logo {
+    width: min(460px, 82vw);
+    height: auto;
+    margin: 0 auto 8px;
+    display: block;
+    filter: drop-shadow(0 6px 24px rgba(0,0,0,0.55));
+  }
+
+  .hero .subtitle {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(1.3rem, 3.4vw, 2rem);
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+
+  .hero .tagline {
+    color: var(--muted);
+    font-size: 1.1rem;
+    max-width: 52ch;
+    margin: 0 auto 28px;
+  }
+
+  .badges {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 6px 13px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(10,18,28,0.6);
+    color: var(--muted);
+  }
+  .badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+  .badge.beta { color: #ffe4a3; border-color: rgba(242,177,52,0.4); }
+  .badge.free { color: #b6e7c4; }
+  .badge.free .dot { background: #6fcf97; }
+
+  .cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 1.02rem;
+    padding: 15px 30px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.2s ease, background 0.2s ease;
+    text-decoration: none;
+  }
+  .btn:hover { text-decoration: none; transform: translateY(-2px); }
+
+  .btn-primary {
+    background: linear-gradient(180deg, #f7c256, var(--accent));
+    color: #241a05;
+    box-shadow: 0 10px 30px rgba(242,177,52,0.28);
+  }
+  .btn-primary:hover { box-shadow: 0 14px 38px rgba(242,177,52,0.4); }
+
+  .btn-ghost {
+    background: rgba(12,20,30,0.5);
+    border-color: var(--border);
+    color: var(--text);
+  }
+  .btn-ghost:hover { background: rgba(20,32,46,0.8); }
+
+  .btn small { display: block; font-weight: 500; font-size: 0.72rem; opacity: 0.75; margin-top: 1px; }
+
+  /* ---------- GRID CARDS ---------- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+    margin-top: 34px;
+  }
+
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+  }
+  .card h3 { font-size: 1.35rem; font-weight: 600; color: var(--text); }
+  .card p { margin: 0; color: var(--muted); font-size: 0.98rem; }
+  .card .ico { font-size: 1.5rem; margin-bottom: 8px; display: block; }
+
+  ul.checks { list-style: none; padding: 0; margin: 26px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 12px 26px; }
+  ul.checks li { position: relative; padding-left: 30px; color: var(--muted); }
+  ul.checks li::before {
+    content: "";
+    position: absolute; left: 0; top: 8px;
+    width: 16px; height: 9px;
+    border-left: 2.5px solid var(--accent);
+    border-bottom: 2.5px solid var(--accent);
+    transform: rotate(-45deg);
+  }
+  ul.checks li strong { color: var(--text); font-weight: 600; }
+
+  /* ---------- VIDEO ---------- */
+  .video-frame {
+    margin-top: 30px;
+    border-radius: var(--radius);
+    border: 1px dashed var(--border);
+    background: var(--panel);
+    aspect-ratio: 16 / 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+  }
+  .video-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .video-placeholder { padding: 30px; color: var(--dim); }
+  .video-placeholder .play {
+    width: 66px; height: 66px; border-radius: 50%;
+    border: 2px solid var(--dim); margin: 0 auto 16px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .video-placeholder .play::after {
+    content: ""; border-left: 18px solid var(--dim);
+    border-top: 11px solid transparent; border-bottom: 11px solid transparent;
+    margin-left: 4px;
+  }
+
+  /* ---------- ROADMAP ---------- */
+  .status-head { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 8px; }
+  .pill {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    font-size: 0.9rem; padding: 5px 14px; border-radius: 6px;
+    background: rgba(242,177,52,0.14); color: var(--accent);
+    border: 1px solid rgba(242,177,52,0.4);
+  }
+  .timeline { margin-top: 30px; display: grid; gap: 14px; }
+  .track {
+    display: grid; grid-template-columns: 26px 1fr; gap: 16px; align-items: start;
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 18px 20px;
+  }
+  .track .marker { width: 16px; height: 16px; border-radius: 50%; margin-top: 5px; }
+  .track.done .marker { background: #6fcf97; box-shadow: 0 0 0 4px rgba(111,207,151,0.15); }
+  .track.now .marker { background: var(--accent); box-shadow: 0 0 0 4px rgba(242,177,52,0.18); }
+  .track.next .marker { background: var(--dim); box-shadow: 0 0 0 4px rgba(111,130,150,0.12); }
+  .track h4 { margin: 0 0 3px; font-size: 1.05rem; font-weight: 600; color: var(--text); }
+  .track p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+  .track .tag { font-size: 0.72rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--dim); }
+
+  /* ---------- SUPPORT / PUBLISHER ---------- */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 32px; }
+  .support-card {
+    background: linear-gradient(160deg, rgba(20,34,48,0.9), rgba(12,20,30,0.9));
+    border: 1px solid var(--border); border-radius: var(--radius); padding: 30px;
+  }
+  .support-card h3 { font-size: 1.5rem; color: var(--text); }
+  .btn-paypal {
+    background: #ffc439; color: #253b80; margin-top: 12px;
+  }
+  .btn-paypal:hover { background: #ffcf5c; }
+
+  .meta-list { list-style: none; padding: 0; margin: 14px 0 0; }
+  .meta-list li { padding: 7px 0; border-bottom: 1px solid var(--border); color: var(--muted); }
+  .meta-list li:last-child { border-bottom: none; }
+  .meta-list li span { color: var(--text); font-weight: 600; }
+
+  /* ---------- DISCLAIMER / FOOTER ---------- */
+  .disclaimer {
+    background: rgba(226,137,74,0.08);
+    border: 1px solid rgba(226,137,74,0.3);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    color: #f0c9a8;
+    font-size: 0.92rem;
+    margin-top: 40px;
+  }
+  .disclaimer strong { color: #ffcfa3; }
+
+  footer {
+    text-align: center;
+    padding: 40px 22px 60px;
+    color: var(--dim);
+    font-size: 0.88rem;
+    border-top: 1px solid var(--border);
+  }
+  footer a { color: var(--muted); }
+
+  @media (max-width: 720px) {
+    .split { grid-template-columns: 1fr; }
+    section { padding: 54px 0; }
+  }
+</style>
 </head>
 <body>
-  <h1>Hello from GitHub Pages!</h1>
-  <p>This is my first webpage.</p>
+
+  <!-- ================= HERO ================= -->
+  <header class="hero">
+    <div class="hero-inner">
+      <img class="logo" src="assets/vrll-logo.png" alt="VRLL logo" />
+      <div class="subtitle">Helicopter Longline Simulator</div>
+      <p class="tagline">Vertical reference longline simulator for external-load practice.</p>
+
+      <div class="badges">
+        <span class="badge beta"><span class="dot"></span> Beta Testing</span>
+        <span class="badge free"><span class="dot"></span> Free to Use</span>
+        <span class="badge"><span class="dot"></span> Windows Desktop</span>
+      </div>
+
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://github.com/ken91773/vrll/releases/latest">
+          <span>&#x2B07; Download VRLL<small>Latest release · Windows</small></span>
+        </a>
+        <a class="btn btn-ghost" href="#about">
+          <span>Learn more</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= ABOUT ================= -->
+  <section id="about">
+    <div class="wrap">
+      <div class="eyebrow">What is VRLL?</div>
+      <h2>Practice the hardest part of utility flying — the hover over the hook.</h2>
+      <p class="lead">
+        VRLL (<strong>V</strong>ertical <strong>R</strong>eference <strong>L</strong>ong<strong>l</strong>ine) is a
+        desktop simulator built for helicopter external-load work. Fly an MD&nbsp;500&ndash;style ship on a longline,
+        coordinate a swinging load, and set the hook precisely on target using real vertical-reference technique &mdash;
+        the same picture and stick discipline used in logging, construction, powerline, and utility operations.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <span class="ico">&#x1FAA2;</span>
+          <h3>Real physics</h3>
+          <p>Genuine pendulum dynamics: rope tension, load inertia, aerodynamic drag, and rotor downwash &mdash; no scripted shortcuts. A light hook dances; a heavy net hangs.</p>
+        </div>
+        <div class="card">
+          <span class="ico">&#x1F3AF;</span>
+          <h3>Fly the hook</h3>
+          <p>Flight director "green dot," swing indicator, and vertical-reference camera views help you place the load on the target and hold a steady hover.</p>
+        </div>
+        <div class="card">
+          <span class="ico">&#x1F5FA;</span>
+          <h3>3 sq mi training area</h3>
+          <p>An open rural landscape with mountains, lakes, winding roads, and working farms &mdash; realistic references for judging drift, height, and position.</p>
+        </div>
+        <div class="card">
+          <span class="ico">&#x1F579;</span>
+          <h3>Your hardware</h3>
+          <p>Full joystick support with configurable axes and buttons, plus mouse-and-keyboard flying. Tunable stability augmentation and training assists.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FEATURES / WHO ITS FOR ================= -->
+  <section>
+    <div class="wrap">
+      <div class="eyebrow">Who it's for &amp; why it helps</div>
+      <h2>Built for pilots who want reps without burning fuel.</h2>
+      <p class="lead">
+        VRLL is supplemental rehearsal for pilots training toward &mdash; or already working in &mdash; vertical-reference
+        external-load operations, and for anyone who wants to understand what longline flying really demands.
+      </p>
+      <ul class="checks">
+        <li><strong>Utility &amp; longline pilots</strong> rehearsing hover coordination and load placement between real flights.</li>
+        <li><strong>Pilots in training</strong> building the vertical-reference sight picture and muscle memory.</li>
+        <li><strong>Load &amp; weight feel</strong> &mdash; swap between an empty hook, a human dummy, and a 55-gallon drum.</li>
+        <li><strong>Selectable stability aids</strong> &mdash; hover hold, hover SAS, altitude hold, and auto-hover to build up gradually.</li>
+        <li><strong>Guided Practice &amp; Free Play</strong> modes so you can drill a task or just fly.</li>
+        <li><strong>Repeatable &amp; free</strong> &mdash; unlimited practice with zero operating cost.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= GAMEPLAY VIDEO (RESERVED) ================= -->
+  <section id="video">
+    <div class="wrap">
+      <div class="eyebrow">See it in action</div>
+      <h2>Gameplay sample</h2>
+      <p class="lead">A short flight demo showing longline hover, load control, and setting the hook on target.</p>
+
+      <!--
+        ============================================================
+        KEN: paste your YouTube video here.
+        Replace the placeholder <div class="video-placeholder">...</div>
+        below with your embed, e.g.:
+
+        <iframe
+          src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+          title="VRLL gameplay"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+        ============================================================
+      -->
+      <div class="video-frame">
+        <div class="video-placeholder">
+          <div class="play"></div>
+          <p>Gameplay video coming soon.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= DEVELOPMENT STATUS ================= -->
+  <section id="status">
+    <div class="wrap">
+      <div class="eyebrow">Development status</div>
+      <div class="status-head">
+        <h2 style="margin:0;">Currently in beta testing</h2>
+        <span class="pill">Beta</span>
+      </div>
+      <p class="lead">
+        VRLL is under active development. The core flight model, load physics, and training environment are flying &mdash;
+        now we're refining realism and gathering pilot feedback. Expect frequent updates.
+      </p>
+
+      <div class="timeline">
+        <div class="track done">
+          <div class="marker"></div>
+          <div>
+            <span class="tag">Flying now</span>
+            <h4>Core simulator</h4>
+            <p>Longline pendulum physics, MD&nbsp;500&ndash;style flight model, vertical-reference camera views, flight director, and the 3&nbsp;sq&nbsp;mi rural training area with mountains, lakes, roads, and farms.</p>
+          </div>
+        </div>
+        <div class="track now">
+          <div class="marker"></div>
+          <div>
+            <span class="tag">In progress</span>
+            <h4>Beta testing &amp; realism tuning</h4>
+            <p>Refining stability augmentation, control feel, and load behavior based on pilot feedback. Report anything that doesn't fly right.</p>
+          </div>
+        </div>
+        <div class="track next">
+          <div class="marker"></div>
+          <div>
+            <span class="tag">Planned</span>
+            <h4>On the roadmap</h4>
+            <p>Wind and gusts, Bambi&nbsp;bucket water operations on the lakes, and additional loads and scenarios.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SUPPORT + PUBLISHER ================= -->
+  <section id="support">
+    <div class="wrap">
+      <div class="eyebrow">Free software · Support development</div>
+      <h2>VRLL is free &mdash; donations keep it improving.</h2>
+      <p class="lead">
+        VRLL is free to download and use. If it helps your flying and you'd like to see it grow, a donation directly
+        funds continued development.
+      </p>
+
+      <div class="split">
+        <div class="support-card">
+          <h3>Support VRLL</h3>
+          <p style="color:var(--muted); margin:0;">
+            Every contribution goes toward development &mdash; new features, more realistic physics, additional
+            scenarios, and ongoing improvements to the simulator.
+          </p>
+          <!-- KEN: replace YOUR_PAYPAL_HANDLE with your PayPal.Me handle (or swap in a hosted donate button link). -->
+          <a class="btn btn-paypal" href="https://www.paypal.com/paypalme/YOUR_PAYPAL_HANDLE">
+            <span>&#x1F49B; Donate via PayPal</span>
+          </a>
+        </div>
+
+        <div class="support-card">
+          <h3>Publisher &amp; credits</h3>
+          <ul class="meta-list">
+            <li>Publisher: <span>Aerobase LLC</span></li>
+            <li>Simulation design: <span>Ken Kuwahara</span></li>
+            <li>Price: <span>Free to use</span></li>
+            <li>Platform: <span>Windows desktop</span></li>
+            <li>Status: <span>Beta</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="disclaimer">
+        <strong>Practice simulation only.</strong> VRLL is supplemental practice software. It is not operational
+        training, flight instruction, or certification, and it is not approved or endorsed by the FAA or any aviation
+        authority. Simulated physics and systems are approximate and will differ from any real helicopter. It is not a
+        substitute for your aircraft flight manual, operator procedures, or qualified instruction. Use at your own risk.
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <p>
+      <strong style="color:var(--muted);">VRLL &mdash; Helicopter Longline Simulator</strong><br />
+      &copy; <span id="year">2026</span> Aerobase LLC. All rights reserved. Simulation design by Ken Kuwahara.
+    </p>
+    <p>
+      <a href="https://github.com/ken91773/vrll">GitHub</a> &nbsp;·&nbsp;
+      <a href="https://github.com/ken91773/vrll/releases/latest">Download</a> &nbsp;·&nbsp;
+      <a href="#support">Support</a>
+    </p>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
