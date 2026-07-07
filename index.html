@@ -174,6 +174,51 @@
 
   .btn small { display: block; font-weight: 500; font-size: 0.72rem; opacity: 0.75; margin-top: 1px; }
 
+  .sys-req {
+    margin-top: 32px;
+    padding: 18px 22px;
+    border-radius: 12px;
+    border: 1px solid rgba(120, 150, 180, 0.22);
+    background: rgba(8, 14, 22, 0.55);
+    text-align: left;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .sys-req strong {
+    display: block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .sys-req ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 6px;
+  }
+
+  .sys-req li {
+    color: var(--muted);
+    font-size: 0.92rem;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .sys-req li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
   /* ---------- GRID CARDS ---------- */
   .grid {
     display: grid;
@@ -261,9 +306,16 @@
   }
   .support-card h3 { font-size: 1.5rem; color: var(--text); }
 
-  .paypal-donate { margin-top: 18px; }
+  .paypal-donate { margin-top: 10px; }
   .paypal-donate form { display: inline-block; margin: 0; }
   .paypal-donate input[type="image"] { display: block; height: auto; max-width: 100%; }
+
+  .donate-label {
+    margin: 16px 0 0;
+    font-weight: 600;
+    color: var(--text);
+    font-size: 0.95rem;
+  }
 
   .inline-link {
     font-size: 0.82rem;
@@ -335,6 +387,17 @@
         <a class="btn btn-ghost" href="#about">
           <span>Learn more</span>
         </a>
+      </div>
+
+      <div class="sys-req">
+        <strong>System Requirements</strong>
+        <ul>
+          <li>Windows 10 or 11 (64-bit)</li>
+          <li>DirectX 11 compatible graphics card</li>
+          <li>8 GB RAM (16 GB recommended)</li>
+          <li>Joystick recommended; mouse and keyboard supported</li>
+          <li>About 3 GB available storage</li>
+        </ul>
       </div>
     </div>
   </header>
@@ -482,16 +545,17 @@
           <h3>Support VRLL</h3>
           <p style="color:var(--muted); margin:0;">
             Every contribution goes toward development &mdash; new features, more realistic physics, additional
-            scenarios, and ongoing improvements to the simulator. Donations are accepted via PayPal and go to
-            Ken Kuwahara to support VRLL development.
+            scenarios, and ongoing improvements to the simulator. If you find the software useful, a contribution
+            would be appreciated.
           </p>
+          <p class="donate-label">Donate with PayPal</p>
           <div class="paypal-donate">
             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
               <input type="hidden" name="cmd" value="_donations" />
               <input type="hidden" name="business" value="aerobasellc@gmail.com" />
               <input type="hidden" name="item_name" value="Support VRLL Development" />
               <input type="hidden" name="currency_code" value="USD" />
-              <input type="image" src="assets/donate.png" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+              <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" title="Donate with PayPal" alt="Donate with PayPal" />
             </form>
           </div>
         </div>
