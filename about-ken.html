@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About Ken Kuwahara — VRLL</title>
+<meta name="description" content="Ken Kuwahara is a utility helicopter pilot and the designer of VRLL, a free longline simulator built to help nurture the next generation of external-load pilots." />
+<meta name="theme-color" content="#0b1622" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg: #0b1622;
+    --panel: rgba(12, 20, 30, 0.82);
+    --border: rgba(120, 150, 180, 0.18);
+    --text: #eaf1f8;
+    --muted: #9fb1c2;
+    --dim: #6f8296;
+    --accent: #f2b134;
+    --accent-2: #5fb0d6;
+    --radius: 14px;
+    --maxw: 720px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2 {
+    font-family: 'Barlow Condensed', 'Inter', sans-serif;
+    letter-spacing: 0.5px;
+    line-height: 1.15;
+    margin: 0 0 0.5em;
+  }
+
+  a { color: var(--accent-2); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .topbar {
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(8, 14, 22, 0.9);
+  }
+
+  .topbar a {
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .wrap {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 56px 22px 80px;
+  }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+
+  h1 { font-size: clamp(2.2rem, 5vw, 3rem); font-weight: 700; }
+  .role { color: var(--muted); font-size: 1.1rem; margin-bottom: 28px; }
+
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px 30px;
+    margin: 28px 0;
+  }
+
+  .panel p { margin: 0 0 1em; color: var(--muted); }
+  .panel p:last-child { margin-bottom: 0; }
+  .panel strong { color: var(--text); font-weight: 600; }
+
+  .panel.highlight {
+    border-color: rgba(242, 177, 52, 0.35);
+    background: linear-gradient(160deg, rgba(20, 34, 48, 0.9), rgba(12, 20, 30, 0.9));
+  }
+
+  .panel.highlight p { color: #d5e2ee; }
+
+  h2 { font-size: 1.45rem; font-weight: 600; color: var(--text); margin-top: 36px; }
+
+  ul.creds {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0 0;
+    display: grid;
+    gap: 10px;
+  }
+
+  ul.creds li {
+    position: relative;
+    padding-left: 22px;
+    color: var(--muted);
+  }
+
+  ul.creds li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  footer {
+    text-align: center;
+    padding: 36px 22px 50px;
+    color: var(--dim);
+    font-size: 0.88rem;
+    border-top: 1px solid var(--border);
+  }
+
+  footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <a href="index.html">&larr; Back to VRLL</a>
+  </div>
+
+  <main class="wrap">
+    <div class="eyebrow">About the designer</div>
+    <h1>Ken Kuwahara</h1>
+    <p class="role">Utility helicopter pilot &middot; VRLL simulation designer</p>
+
+    <div class="panel">
+      <p>
+        Ken Kuwahara is a utility helicopter pilot based in the Los Angeles area with more than
+        <strong>three decades of helicopter flying experience</strong>. His career has centered on the kind of
+        work VRLL is built to rehearse: <strong>vertical-reference longline operations</strong> in utility,
+        powerline, and construction environments.
+      </p>
+      <p>
+        He currently flies as a utility helicopter pilot for the
+        <strong>Los Angeles Department of Water and Power (LADWP)</strong>, where external-load coordination,
+        precise hover work, and sound judgment over the hook are part of everyday operations.
+      </p>
+    </div>
+
+    <h2>Longline experience</h2>
+    <div class="panel">
+      <p>
+        Ken's longline background spans the full arc of utility helicopter work &mdash; from construction lifts
+        and general external-load flying to the specialized demands of <strong>powerline and utility operations</strong>.
+        That experience shapes how VRLL handles load swing, hover discipline, and the sight picture pilots use
+        when flying the hook rather than the aircraft.
+      </p>
+      <ul class="creds">
+        <li>Decades of helicopter utility and external-load flying</li>
+        <li>Powerline and construction longline operations</li>
+        <li>Current utility helicopter pilot, LADWP</li>
+      </ul>
+    </div>
+
+    <h2>Why VRLL</h2>
+    <div class="panel highlight">
+      <p>
+        VRLL is a <strong>passion project</strong> Ken built on his own time to give something back to the
+        helicopter community. Longline flying is difficult to practice safely on the ground and expensive to
+        rehearse in the aircraft. He wanted a free, repeatable way for pilots &mdash; especially those coming
+        up in utility and external-load work &mdash; to build coordination and confidence before the real hook is
+        on the line.
+      </p>
+      <p>
+        The goal is simple: <strong>help nurture future longline pilots</strong> and support the community that
+        trained and carried him through a long utility career.
+      </p>
+    </div>
+
+    <p style="color:var(--dim); font-size:0.92rem; margin-top:36px;">
+      Questions or feedback?
+      <a href="mailto:aerobasellc@gmail.com?subject=VRLL%20Inquiry">Send an inquiry</a>.
+    </p>
+  </main>
+
+  <footer>
+    <p>
+      <a href="index.html">VRLL</a> &nbsp;·&nbsp;
+      <a href="https://github.com/ken91773/vrll/releases/latest">Download</a> &nbsp;·&nbsp;
+      <a href="mailto:aerobasellc@gmail.com?subject=VRLL%20Inquiry">Inquiries</a>
+    </p>
+    <p>&copy; <span id="year">2026</span> Aerobase LLC</p>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
