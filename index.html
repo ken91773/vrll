@@ -89,15 +89,27 @@
     border-top: none;
   }
 
-  .hero-inner { max-width: 760px; }
+  .hero-inner { max-width: 900px; width: 100%; }
+
+  .hero-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    text-align: left;
+    margin-bottom: 26px;
+  }
 
   .hero img.logo {
-    width: min(460px, 82vw);
+    width: min(220px, 42vw);
     height: auto;
-    margin: 0 auto 8px;
+    margin: 0;
+    flex-shrink: 0;
     display: block;
     filter: drop-shadow(0 6px 24px rgba(0,0,0,0.55));
   }
+
+  .hero-title-block { text-align: right; }
 
   .hero .subtitle {
     font-family: 'Barlow Condensed', sans-serif;
@@ -111,8 +123,8 @@
   .hero .tagline {
     color: var(--muted);
     font-size: 1.1rem;
-    max-width: 52ch;
-    margin: 0 auto 28px;
+    max-width: 42ch;
+    margin: 0 0 0 auto;
   }
 
   .badges {
@@ -141,7 +153,7 @@
   .badge.free { color: #b6e7c4; }
   .badge.free .dot { background: #6fcf97; }
 
-  .cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .cta-row { display: flex; gap: 18px; justify-content: center; align-items: center; flex-wrap: wrap; }
 
   .btn {
     display: inline-flex;
@@ -175,26 +187,24 @@
   .btn small { display: block; font-weight: 500; font-size: 0.72rem; opacity: 0.75; margin-top: 1px; }
 
   .sys-req {
-    margin-top: 32px;
-    padding: 18px 22px;
+    margin: 0;
+    padding: 14px 18px;
     border-radius: 12px;
     border: 1px solid rgba(120, 150, 180, 0.22);
     background: rgba(8, 14, 22, 0.55);
     text-align: left;
-    max-width: 520px;
-    margin-left: auto;
-    margin-right: auto;
+    max-width: 340px;
   }
 
   .sys-req strong {
     display: block;
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
     color: var(--text);
-    margin-bottom: 10px;
+    margin-bottom: 6px;
   }
 
   .sys-req ul {
@@ -202,13 +212,13 @@
     padding: 0;
     list-style: none;
     display: grid;
-    gap: 6px;
+    gap: 3px;
   }
 
   .sys-req li {
     color: var(--muted);
-    font-size: 0.92rem;
-    padding-left: 16px;
+    font-size: 0.82rem;
+    padding-left: 14px;
     position: relative;
   }
 
@@ -362,6 +372,10 @@
   @media (max-width: 720px) {
     .split { grid-template-columns: 1fr; }
     section { padding: 54px 0; }
+    .hero-top { flex-direction: column; text-align: center; gap: 14px; }
+    .hero-title-block { text-align: center; }
+    .hero .tagline { margin: 0 auto; }
+    .hero img.logo { width: min(200px, 60vw); }
   }
 </style>
 </head>
@@ -370,9 +384,13 @@
   <!-- ================= HERO ================= -->
   <header class="hero">
     <div class="hero-inner">
-      <img class="logo" src="assets/vrll-logo.png" alt="VRLL logo" />
-      <div class="subtitle">Helicopter Longline Simulator</div>
-      <p class="tagline">Vertical reference longline simulator for external-load practice.</p>
+      <div class="hero-top">
+        <img class="logo" src="assets/vrll-logo.png" alt="VRLL logo" />
+        <div class="hero-title-block">
+          <div class="subtitle">Helicopter Longline Simulator</div>
+          <p class="tagline">Vertical reference longline simulator for external-load practice.</p>
+        </div>
+      </div>
 
       <div class="badges">
         <span class="badge beta"><span class="dot"></span> Beta Testing</span>
@@ -384,20 +402,16 @@
         <a class="btn btn-primary" href="https://github.com/ken91773/vrll/releases/latest">
           <span>&#x2B07; Download VRLL<small>Latest release · Windows</small></span>
         </a>
-        <a class="btn btn-ghost" href="#about">
-          <span>Learn more</span>
-        </a>
-      </div>
-
-      <div class="sys-req">
-        <strong>System Requirements</strong>
-        <ul>
-          <li>Windows 10 or 11 (64-bit)</li>
-          <li>DirectX 11 compatible graphics card</li>
-          <li>8 GB RAM (16 GB recommended)</li>
-          <li>Joystick recommended; mouse and keyboard supported</li>
-          <li>About 3 GB available storage</li>
-        </ul>
+        <div class="sys-req">
+          <strong>System Requirements</strong>
+          <ul>
+            <li>Windows 10 or 11 (64-bit)</li>
+            <li>DirectX 11 compatible graphics card</li>
+            <li>8 GB RAM (16 GB recommended)</li>
+            <li>Joystick recommended; mouse and keyboard supported</li>
+            <li>About 3 GB available storage</li>
+          </ul>
+        </div>
       </div>
     </div>
   </header>
