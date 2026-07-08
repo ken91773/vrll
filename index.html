@@ -195,25 +195,73 @@
 
   .btn small { display: block; font-weight: 500; font-size: 0.72rem; opacity: 0.75; margin-top: 1px; }
 
+  .sys-req-wrap { position: relative; display: inline-flex; }
+
+  .sys-req-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 14px 22px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(10, 18, 28, 0.6);
+    color: var(--text);
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+  .sys-req-badge::before { content: "\2699"; color: var(--accent); font-size: 1rem; }
+  .sys-req-badge:hover { background: rgba(20, 32, 46, 0.85); border-color: rgba(242, 177, 52, 0.4); text-decoration: none; }
+
   .sys-req {
-    margin: 0;
-    padding: 7px 9px;
-    border-radius: 6px;
-    border: 1px solid rgba(120, 150, 180, 0.22);
-    background: rgba(8, 14, 22, 0.55);
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
+    z-index: 20;
+    padding: 18px 24px;
+    border-radius: 12px;
+    border: 1px solid rgba(120, 150, 180, 0.3);
+    background: rgba(8, 14, 22, 0.96);
+    box-shadow: 0 16px 44px rgba(0, 0, 0, 0.5);
     text-align: left;
-    max-width: 170px;
+    width: 340px;
+    max-width: 86vw;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+  }
+
+  .sys-req::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 8px solid transparent;
+    border-bottom-color: rgba(8, 14, 22, 0.96);
+  }
+
+  .sys-req-wrap:hover .sys-req,
+  .sys-req-wrap:focus-within .sys-req {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
   }
 
   .sys-req strong {
     display: block;
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.45rem;
+    font-size: 0.95rem;
     font-weight: 600;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
     text-transform: uppercase;
     color: var(--text);
-    margin-bottom: 3px;
+    margin-bottom: 10px;
   }
 
   .sys-req ul {
@@ -221,13 +269,13 @@
     padding: 0;
     list-style: none;
     display: grid;
-    gap: 2px;
+    gap: 6px;
   }
 
   .sys-req li {
     color: var(--muted);
-    font-size: 0.41rem;
-    padding-left: 7px;
+    font-size: 0.88rem;
+    padding-left: 16px;
     position: relative;
   }
 
@@ -408,17 +456,20 @@
 
       <div class="cta-row">
         <a class="btn btn-primary" href="https://github.com/ken91773/vrll/releases/latest">
-          <span>&#x2B07; Download VRLL<small>Latest release · Windows</small></span>
+          <span>&#x2B07; Download VRLL<small>v.0.900 · Windows</small></span>
         </a>
-        <div class="sys-req">
-          <strong>System Requirements</strong>
-          <ul>
-            <li>Windows 10 or 11 (64-bit)</li>
-            <li>DirectX 11 compatible graphics card</li>
-            <li>8 GB RAM (16 GB recommended)</li>
-            <li>Mouse or joystick. (Touchpad not recommended)</li>
-            <li>About 3 GB available storage</li>
-          </ul>
+        <div class="sys-req-wrap">
+          <button type="button" class="sys-req-badge" aria-describedby="sysReqCard">System Requirements</button>
+          <div class="sys-req" id="sysReqCard" role="tooltip">
+            <strong>System Requirements</strong>
+            <ul>
+              <li>Windows 10 or 11 (64-bit)</li>
+              <li>DirectX 11 compatible graphics card</li>
+              <li>8 GB RAM (16 GB recommended)</li>
+              <li>Mouse or joystick. (Touchpad not recommended)</li>
+              <li>About 3 GB available storage</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
