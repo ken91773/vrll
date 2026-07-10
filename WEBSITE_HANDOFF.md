@@ -22,6 +22,7 @@ website repo, **separate from the Unity game project** (that lives at
 |------|---------|
 | `index.html` | Single-page landing site (all CSS inline in `<style>`). Hero, About, Features, Video (placeholder), Status/roadmap, Support/PayPal, Footer. |
 | `about-ken.html` | Bio page for Ken Kuwahara ("Why VRLL" card, longline experience). |
+| `contact.html` | VRLL-styled inquiry page embedding the Google Form, with a direct-form fallback link. |
 | `assets/vrll-bg.jpg` | Hero background (currently from `vrllbg5.png`, 2048×1144, ~414 KB). |
 | `assets/vrll-title.png` | Hero title graphic "Helicopter Longline SIMULATOR" (from `titlevrll3.png`, trimmed+resized to 1240×347). |
 | `assets/vrll-logo.png` | Logo (top-left of hero; contains small "Helicopter Longline Simulator" subtext). |
@@ -51,6 +52,14 @@ website repo, **separate from the Unity game project** (that lives at
   in the preceding paragraph without a paragraph break.
 - "Free Play" remains unchanged because it is the name of a gameplay mode, not a
   pricing statement.
+
+## Inquiry form
+
+- Inquiry links on `index.html` and `about-ken.html` point to `contact.html`.
+- `contact.html` embeds the Google Form using its `?embedded=true` URL and provides
+  a direct Google Forms link if the embed does not display.
+- Form URL:
+  `https://docs.google.com/forms/d/e/1FAIpQLSfIP2Gi2Dzd_ekmIArTsYFFi3K1DJ-K7JHo30_IbU0hdK5Ijw/viewform`
 
 ## Image workflow (important)
 
