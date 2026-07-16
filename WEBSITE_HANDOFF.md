@@ -35,9 +35,9 @@ website repo, **separate from the Unity game project** (that lives at
   so subjects (helipad/logo) aren't cropped on tall/narrow viewports. Top padding
   reduced to 28px.
 - `.hero-top` flex row: **logo left**, **title graphic right** (`assets/vrll-title.png?v=3`).
-- Badges: Free Beta Version / Windows Desktop.
-- `.cta-row`: yellow **Download VRLL** button (subtext **"v.0.900 · Windows"**,
-  links to `/releases/latest`) + **System Requirements** hover badge.
+- Badges: Windows logo badge (no free-beta badge).
+- `.cta-row`: yellow **Become a beta tester** button (subtext **Join our Discord for latest updates**,
+  links to Discord invite) + **System Requirements** hover badge.
 - **System Requirements** is a `.sys-req-badge` (gear pill). Hovering (or focus)
   reveals `.sys-req` popover card (340px, with arrow). No longer an always-on card.
 

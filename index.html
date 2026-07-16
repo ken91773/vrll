@@ -158,8 +158,12 @@
     color: var(--muted);
   }
   .badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
-  .badge.free { color: #b6e7c4; }
-  .badge.free .dot { background: #6fcf97; }
+  .badge .win-logo {
+    width: 14px;
+    height: 14px;
+    display: block;
+    flex-shrink: 0;
+  }
 
   .cta-row { display: flex; gap: 18px; justify-content: center; align-items: center; flex-wrap: wrap; }
 
@@ -448,13 +452,17 @@
       </div>
 
       <div class="badges">
-        <span class="badge free"><span class="dot"></span> Free Beta Version</span>
-        <span class="badge"><span class="dot"></span> Windows Desktop</span>
+        <span class="badge" title="Windows">
+          <svg class="win-logo" viewBox="0 0 88 88" aria-hidden="true" focusable="false">
+            <path fill="currentColor" d="M0 12.402l35.687-4.86.002 34.32H0V12.402zm39.713-5.432L87.978 0v41.862H39.713V6.97zM0 50.287h35.687V84.59L0 79.758V50.287zm39.713 0h48.265V88l-48.265-6.764V50.287z"/>
+          </svg>
+          Windows
+        </span>
       </div>
 
       <div class="cta-row">
-        <a class="btn btn-primary" href="https://github.com/ken91773/vrll/releases/latest">
-          <span>&#x2B07; Download VRLL<small>v.0.900 · Windows</small></span>
+        <a class="btn btn-primary" href="https://discord.gg/HxVQQ3JcK" target="_blank" rel="noopener noreferrer">
+          <span>Become a beta tester<small>Join our Discord for latest updates</small></span>
         </a>
         <div class="sys-req-wrap">
           <button type="button" class="sys-req-badge" aria-describedby="sysReqCard">System Requirements</button>
