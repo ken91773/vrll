@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /about-ken.html
 
 Sitemap: https://vrllsim.com/sitemap.xml
