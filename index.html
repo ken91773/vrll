@@ -3,24 +3,89 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>VRLL — Helicopter Longline Simulator</title>
-<meta name="description" content="VRLL is a free beta version of a helicopter vertical-reference longline simulator for external-load practice — hover coordination, load control, and flying the hook over a target. Published by Aerobase LLC." />
+<title>VRLL — Vertical Reference Longline Helicopter Simulator</title>
+<meta name="description" content="Realistic vertical-reference longline simulator for helicopter pilots. Custom ship, line, and load physics; unique cyclic guide; Windows beta by Aerobase LLC." />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta name="author" content="Ken Kuwahara, Aerobase LLC" />
 <meta name="theme-color" content="#0b1622" />
+<link rel="canonical" href="https://vrllsim.com/" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
 <!-- Open Graph / social preview -->
-<meta property="og:title" content="VRLL — Helicopter Longline Simulator" />
-<meta property="og:description" content="A free beta version of a vertical-reference longline simulator for external-load practice." />
+<meta property="og:site_name" content="VRLL" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content="VRLL — Vertical Reference Longline Helicopter Simulator" />
+<meta property="og:description" content="Not a game — a realistic vertical-reference longline training aid for helicopter pilots and experienced heli-simmers." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://vrllsim.com/" />
 <meta property="og:image" content="https://vrllsim.com/assets/vrll-bg.jpg" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="2048" />
+<meta property="og:image:height" content="1144" />
+<meta property="og:image:alt" content="VRLL helicopter longline simulator landing scene" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="VRLL — Vertical Reference Longline Helicopter Simulator" />
+<meta name="twitter:description" content="Realistic longline simulator with custom physics and a cyclic guide built for hover and load control." />
+<meta name="twitter:image" content="https://vrllsim.com/assets/vrll-bg.jpg" />
+<meta name="twitter:image:alt" content="VRLL helicopter longline simulator landing scene" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="preload" as="image" href="assets/vrll-bg.jpg?v=4" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://vrllsim.com/#website",
+      "url": "https://vrllsim.com/",
+      "name": "VRLL",
+      "description": "Vertical-reference longline helicopter simulator for pilots and experienced heli-simmers.",
+      "publisher": { "@id": "https://vrllsim.com/#organization" },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://vrllsim.com/#organization",
+      "name": "Aerobase LLC",
+      "url": "https://vrllsim.com/",
+      "logo": "https://vrllsim.com/assets/vrll-logo.png"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://vrllsim.com/#software",
+      "name": "VRLL",
+      "alternateName": "Vertical Reference Longline Simulator",
+      "applicationCategory": "EducationalApplication",
+      "applicationSubCategory": "FlightSimulator",
+      "operatingSystem": "Windows 10, Windows 11",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "description": "Free during beta"
+      },
+      "description": "Realistic vertical-reference longline simulator with custom ship, line, and load physics and a unique cyclic guide for precise hover and load control.",
+      "url": "https://vrllsim.com/",
+      "image": "https://vrllsim.com/assets/vrll-bg.jpg",
+      "author": {
+        "@type": "Person",
+        "name": "Ken Kuwahara",
+        "url": "https://vrllsim.com/about-ken.html"
+      },
+      "publisher": { "@id": "https://vrllsim.com/#organization" }
+    }
+  ]
+}
+</script>
 
 <style>
   :root {
@@ -41,6 +106,18 @@
   * { box-sizing: border-box; }
 
   html { scroll-behavior: smooth; }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
 
   body {
     margin: 0;
@@ -454,9 +531,10 @@
 
   <!-- ================= HERO ================= -->
   <header class="hero">
+    <h1 class="sr-only">VRLL — Vertical Reference Longline Helicopter Simulator</h1>
     <div class="hero-inner">
       <div class="hero-top">
-        <img class="logo" src="assets/vrll-logo.png" alt="VRLL logo" />
+        <img class="logo" src="assets/vrll-logo.png" alt="VRLL — Vertical Reference Longline Learning" />
         <div class="hero-title-block">
           <img class="title" src="assets/vrll-title.png?v=3" alt="Helicopter Longline Simulator" />
         </div>
@@ -495,11 +573,12 @@
     </div>
   </header>
 
+  <main id="main">
   <!-- ================= ABOUT ================= -->
-  <section id="about">
+  <section id="about" aria-labelledby="about-heading">
     <div class="wrap">
       <div class="eyebrow">What is VRLL?</div>
-      <h2>Not a game - A realistic vertical reference longline training aid</h2>
+      <h2 id="about-heading">Not a game - A realistic vertical reference longline training aid</h2>
       <p class="lead">
         The ship, the line, and the load share a custom physics model: real tension, aerodynamic drag, and wind as true airspeed, so you feel authentic pendulum swing, load oscillation, and the parallax motion that makes vertical reference work. At its center is a unique cyclic guide, designed to compensate for the sensory cues a simulator cannot fully recreate &mdash; seat-of-the-pants feel, vestibular motion, and peripheral depth &mdash; so stick inputs stay precise when the visual picture alone is not enough. Layer on wind and load-cell cues, instruments, verbal coaching and structured lessons &mdash; in a world made for precise hover and load control.
       </p>
@@ -530,10 +609,10 @@
   </section>
 
   <!-- ================= FEATURES / WHO ITS FOR ================= -->
-  <section>
+  <section id="audience" aria-labelledby="audience-heading">
     <div class="wrap">
       <div class="eyebrow">Who it's for &amp; why it helps</div>
-      <h2>Built by a VRLL pilot for helicopter pilots (and experienced heli-simmers)</h2>
+      <h2 id="audience-heading">Built by a VRLL pilot for helicopter pilots (and experienced heli-simmers)</h2>
       <p class="lead">
         VRLL is supplemental rehearsal for pilots training toward &mdash; or already working in &mdash; vertical-reference
         external-load operations, and for anyone who wants to understand what longline flying really demands.
@@ -554,31 +633,17 @@
     </div>
   </section>
 
-  <!-- ================= GAMEPLAY VIDEO (RESERVED) ================= -->
+  <!-- ================= GAMEPLAY VIDEO ================= -->
   <section id="video">
     <div class="wrap">
-      <div class="eyebrow">See it in action</div>
-      <h2>Gameplay sample</h2>
-      <p class="lead">A short flight demo showing longline hover, load control, and setting the hook on target.</p>
-
-      <!--
-        ============================================================
-        KEN: paste your YouTube video here.
-        Replace the placeholder <div class="video-placeholder">...</div>
-        below with your embed, e.g.:
-
-        <iframe
-          src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-          title="VRLL gameplay"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen></iframe>
-        ============================================================
-      -->
       <div class="video-frame">
-        <div class="video-placeholder">
-          <div class="play"></div>
-          <p>Gameplay video coming soon.</p>
-        </div>
+        <iframe
+          src="https://www.youtube.com/embed/ftPTH0gPoDI"
+          title="VRLL gameplay"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"></iframe>
       </div>
     </div>
   </section>
@@ -653,13 +718,13 @@
           <h3>Publisher &amp; credits</h3>
           <ul class="meta-list">
             <li>Publisher: <span>Aerobase LLC</span></li>
-            <li>Simulation design: <span>Ken Kuwahara</span><a class="inline-link" href="about-ken.html">About Ken</a></li>
+            <li>Simulation design: <span>Ken Kuwahara</span><a class="inline-link" href="/about-ken.html">About Ken</a></li>
             <li>Price: <span>Free during beta</span></li>
             <li>Platform: <span>Windows desktop</span></li>
             <li>Status: <span>Beta</span></li>
           </ul>
           <div class="contact-links">
-            <a href="contact.html">Send an inquiry</a>
+            <a href="/contact.html">Send an inquiry</a>
           </div>
         </div>
       </div>
@@ -672,19 +737,21 @@
       </div>
     </div>
   </section>
+  </main>
 
   <!-- ================= FOOTER ================= -->
   <footer>
     <p>
-      <strong style="color:var(--muted);">VRLL &mdash; Helicopter Longline Simulator</strong><br />
+      <strong style="color:var(--muted);">VRLL &mdash; Vertical Reference Longline Helicopter Simulator</strong><br />
       &copy; <span id="year">2026</span> Aerobase LLC. All rights reserved. Simulation design by
-      <a href="about-ken.html">Ken Kuwahara</a>.
+      <a href="/about-ken.html">Ken Kuwahara</a>.
     </p>
     <p>
       <a href="https://github.com/ken91773/vrll">GitHub</a> &nbsp;·&nbsp;
       <a href="#support">Support</a> &nbsp;·&nbsp;
-      <a href="contact.html">Inquiries</a> &nbsp;·&nbsp;
-      <a href="about-ken.html">About Ken</a>
+      <a href="/contact.html">Inquiries</a> &nbsp;·&nbsp;
+      <a href="/about-ken.html">About Ken</a> &nbsp;·&nbsp;
+      <a href="/sitemap.xml">Sitemap</a>
     </p>
   </footer>
 
