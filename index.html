@@ -435,10 +435,16 @@
   ul.checks li strong { color: var(--text); font-weight: 600; }
 
   /* ---------- VIDEO ---------- */
-  .video-frame {
+  .video-stack {
+    display: grid;
+    gap: 28px;
     margin-top: 30px;
+    justify-items: center;
+  }
+  .video-frame {
+    width: min(100%, 640px);
     border-radius: var(--radius);
-    border: 1px dashed var(--border);
+    border: 1px solid var(--border);
     background: var(--panel);
     aspect-ratio: 16 / 9;
     display: flex;
@@ -674,14 +680,25 @@
   <!-- ================= GAMEPLAY VIDEO ================= -->
   <section id="video">
     <div class="wrap">
-      <div class="video-frame">
-        <iframe
-          src="https://www.youtube.com/embed/ftPTH0gPoDI"
-          title="VRLL gameplay"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-          loading="lazy"
-          referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      <div class="video-stack">
+        <div class="video-frame">
+          <iframe
+            src="https://www.youtube.com/embed/ftPTH0gPoDI"
+            title="VRLL gameplay"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+        <div class="video-frame">
+          <iframe
+            src="https://www.youtube.com/embed/MXJsW7AgPVw"
+            title="VRLL gameplay — vertical reference longline"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
       </div>
     </div>
   </section>
